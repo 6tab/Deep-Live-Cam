@@ -146,9 +146,7 @@ def create_root(start: Callable[[], None], destroy: Callable[[], None]) -> ctk.C
 
     root = ctk.CTk()
     root.minsize(ROOT_WIDTH, ROOT_HEIGHT)
-    root.title(
-        f"{modules.metadata.name} {modules.metadata.version} {modules.metadata.edition}"
-    )
+    root.title(f"LadishAI - {modules.metadata.name} {modules.metadata.version} {modules.metadata.edition}")
     root.configure()
     root.protocol("WM_DELETE_WINDOW", lambda: destroy())
 
