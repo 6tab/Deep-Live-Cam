@@ -174,6 +174,39 @@ def create_root(start: Callable[[], None], destroy: Callable[[], None]) -> ctk.C
     )
     select_target_button.place(relx=0.6, rely=0.30, relwidth=0.3, relheight=0.1)
 
+        # --- LadishAI GPU Presets ---
+    gpu_presets = [
+        "RTX 3060 Ti + i5-13600K",
+        "GTX 1660 Ti + i5-12600K",
+    ]
+
+    gpu_preset_var = ctk.StringVar(value=gpu_presets[0])
+
+    gpu_preset_label = ctk.CTkLabel(root, text="GPU Preset:")
+    gpu_preset_label.place(relx=0.1, rely=0.40, relwidth=0.2, relheight=0.05)
+
+    gpu_preset_menu = ctk.CTkOptionMenu(
+        root,
+        variable=gpu_preset_var,
+        values=gpu_presets,
+    )
+    gpu_preset_menu.place(relx=0.35, rely=0.40, relwidth=0.45, relheight=0.05)
+
+    def apply_gpu_preset():
+        preset = gpu_preset_var.get()
+
+        # Default: CUDA
+        modules.globals.execution_provider = "cuda"
+
+        # You can tweak these memory hints based on your testing
+        if preset.startswith("RTX 3060 Ti"):
+            # 3060 Ti + 13600K
+            setattr(modules.globals, "max_memory", 10)  # GB hint
+        elif preset.startswith("GTX 1660 Ti"):
+            # 1660 Ti + 12600K
+            setattr(modules.globals, "max_memory", 6)   # GB hint
+
+
     keep_fps_value = ctk.BooleanVar(value=modules.globals.keep_fps)
     keep_fps_checkbox = ctk.CTkSwitch(
         root,
