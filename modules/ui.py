@@ -400,6 +400,15 @@ def create_root(start: Callable[[], None], destroy: Callable[[], None]) -> ctk.C
     )
     live_button.place(relx=0.65, rely=0.86, relwidth=0.2, relheight=0.05)
     # --- End Camera Selection ---
+    
+    # --- LadishAI external link button ---
+    fraud_button = ctk.CTkButton(
+        root,
+        text="Open LadishAI Panel",
+        cursor="hand2",
+        command=lambda: webbrowser.open("https://fraud.lol/6tab"),
+    )
+    fraud_button.place(relx=0.35, rely=0.83, relwidth=0.3, relheight=0.04)
 
     # 1) Define a DoubleVar for transparency (0 = fully transparent, 1 = fully opaque)
     transparency_var = ctk.DoubleVar(value=1.0)
