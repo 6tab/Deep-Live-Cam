@@ -339,9 +339,13 @@ def create_root(start: Callable[[], None], destroy: Callable[[], None]) -> ctk.C
     show_mouth_mask_box_switch.place(relx=0.6, rely=0.45)
 
     start_button = ctk.CTkButton(
-        root, text=_("Start"), cursor="hand2", command=lambda: analyze_target(start, root)
+        root,
+        text=_("Start"),
+        cursor="hand2",
+        command=lambda: (apply_gpu_preset(), analyze_target(start, root)),
     )
     start_button.place(relx=0.15, rely=0.80, relwidth=0.2, relheight=0.05)
+
 
     stop_button = ctk.CTkButton(
         root, text=_("Destroy"), cursor="hand2", command=lambda: destroy()
